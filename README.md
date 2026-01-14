@@ -110,6 +110,7 @@ term allows quick adjustments to daily alignment changes without repeating the f
 calibration procedure.<br>
 <br>
 7. Robot Control and Motion Execution<br>
+<br>
 Robot motion is executed using Cartesian position control to ensure smooth, predictable, and
 safe operation. Once the corrected target position is obtained, the robot follows a predefined
 pick-and-place sequence.<br>
