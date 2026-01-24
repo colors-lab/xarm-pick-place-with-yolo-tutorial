@@ -1,3 +1,5 @@
+Vision-Based Robotic Pick-and-Place Using YOLO and RGB-D Sensing
+
 ##  Contents
 - [System Overview](#system-overview)
 - [Hardware Setup](#hardware-setup)
@@ -10,8 +12,6 @@
 - [Known Issues and Practical Notes](#known-issues-and-practical-notes)
 - [Summary](#summary)
 
-
-Vision-Based Robotic Pick-and-Place Using YOLO and RGB-D Sensing
 ## System Overview
 
 This document explains how to use and understand a vision-based robotic pick-and-place
