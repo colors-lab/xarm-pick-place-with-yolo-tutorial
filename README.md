@@ -1,10 +1,18 @@
 ##  Contents
 - [System Overview](#system-overview)
 - [Hardware Setup](#hardware-setup)
+- [Software Pipeline Overview](#software-pipeline-overview)
+- [Object Detection](#object-detection)
+- [2D-to-3D Localization and Calibration](#2d-to-3d-localization-and-calibration)
+- [Empirical Error Compensation](#empirical-error-compensation)
+- [Robot Control and Motion Execution](#robot-control-and-motion-execution)
+- [Running the System](#running-the-system)
+- [Known Issues and Practical Notes](#known-issues-and-practical-notes)
+- [Summary](#summary)
 
 
 Vision-Based Robotic Pick-and-Place Using YOLO and RGB-D Sensing
-1. System Overview
+## System Overview
 
 This document explains how to use and understand a vision-based robotic pick-and-place
 system developed in the ColorsLab environment. The system allows a robotic arm to
@@ -18,7 +26,7 @@ manipulation task.
 The goal of this document is to provide a practical guide that enables users to understand,
 operate, and debug the system in a laboratory setting.
 
-2. Hardware Setup
+## Hardware Setup
    
 The system consists of three main hardware components arranged within a shared workspace.<br>
 
@@ -49,7 +57,7 @@ A central workstation runs all vision processing and robot control software. The
 implemented in Python and communicates with the robot using the xArm API.<br>
 
 
-3. Software Pipeline Overview<br>
+## Software Pipeline Overview<br>
 
 The system operates continuously in a closed-loop perception-to-action pipeline. The main
 stages of the pipeline are:
@@ -63,7 +71,7 @@ stages of the pipeline are:
 Each stage produces an intermediate output that is passed to the next stage. This modular
 structure allows individual components to be tested and adjusted independently.<br>
 
-4. Object Detection<br>
+## Object Detection<br>
 
 The object detection model was trained using a custom dataset obtained through the
 Roboflow platform. The dataset consists of RGB images of lemons captured under laboratory
@@ -77,7 +85,7 @@ physical contact location between the object and the table surface and helps red
 caused by perspective distortion.
 The selected pixel coordinates serve as the input for geometric localization.<br>
 
-5. 2D-to-3D Localization and Calibration<br>
+## 2D-to-3D Localization and Calibration<br>
 <br>
 2D-to-3D Projection<br>
 <br>
@@ -103,7 +111,8 @@ fixed during runtime.<br>
 <br>
 <img width="256" height="308" alt="image" src="https://github.com/user-attachments/assets/65f582e7-d99f-4eed-be01-4395a516e806" /><br>
 <br>
-6. Empirical Error Compensation<br>
+
+## Empirical Error Compensation<br>
 <br>
 In practice, small systematic localization errors remain even after rigid calibration. These
 errors are mainly caused by lens distortion, mechanical tolerances, and minor variations in
@@ -114,7 +123,8 @@ coordinates to improve accuracy across the workspace. Additionally, a configurab
 term allows quick adjustments to daily alignment changes without repeating the full
 calibration procedure.<br>
 <br>
-7. Robot Control and Motion Execution<br>
+
+## Robot Control and Motion Execution<br>
 <br>
 Robot motion is executed using Cartesian position control to ensure smooth, predictable, and
 safe operation. Once the corrected target position is obtained, the robot follows a predefined
@@ -131,7 +141,8 @@ controlled explicitly through open and close commands synchronized with the moti
 sequence. This strategy ensures collision-free operation even in the presence of small
 localization errors<br>
 <br>
-8. Running the System<br>
+
+## Running the System<br>
 <br>
 To operate the system:<br>
 - Ensure that the robot, camera, and workstation are powered on and connected.
@@ -143,7 +154,8 @@ keyboard input).
 The system continuously updates detections and localization results until the operation is
 completed or manually stopped.<br>
 <br>
-9. Known Issues and Practical Notes<br>
+
+## Known Issues and Practical Notes<br>
 <br>
 ● The camera mount is not fully rigid, and small mechanical shifts may occur over time.<br>
 ● As a result, camera-to-robot calibration accuracy can degrade gradually.<br>
@@ -154,7 +166,8 @@ variations.<br>
 These limitations are typical in laboratory environments and should be considered during
 extended operation.<br>
 <br>
-10. Summary<br>
+
+## Summary<br>
 <br>
 This document presented a practical guide for operating a vision-based robotic
 pick-and-place system. By combining deep learning–based object detection, geometric
